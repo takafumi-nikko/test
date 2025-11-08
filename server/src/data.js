@@ -1,5 +1,19 @@
 import { nanoid } from 'nanoid';
 
+const svgToDataUri = (svg) => `data:image/svg+xml;base64,${Buffer.from(svg).toString('base64')}`;
+
+const inlineImages = {
+  cucumber: svgToDataUri(
+    String.raw`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120" role="img" aria-label="新鮮なきゅうり"><defs><linearGradient id="g1" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#d1f7c4"/><stop offset="100%" stop-color="#92d29d"/></linearGradient></defs><rect width="160" height="120" fill="url(#g1)"/><ellipse cx="90" cy="60" rx="52" ry="26" fill="#027a48"/><ellipse cx="90" cy="60" rx="46" ry="20" fill="#00a15c"/><circle cx="54" cy="52" r="6" fill="#a7f1c1" opacity="0.7"/><circle cx="67" cy="70" r="4" fill="#a7f1c1" opacity="0.6"/><path d="M38 60c18-22 44-32 75-14" stroke="#f2ffeb" stroke-width="4" stroke-linecap="round" opacity="0.4"/></svg>`
+  ),
+  tomato: svgToDataUri(
+    String.raw`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120" role="img" aria-label="完熟トマト"><defs><linearGradient id="g2" x1="0%" x2="0%" y1="0%" y2="100%"><stop offset="0%" stop-color="#ffe0d5"/><stop offset="100%" stop-color="#ffab9d"/></linearGradient></defs><rect width="160" height="120" fill="url(#g2)"/><circle cx="70" cy="62" r="34" fill="#d62828"/><circle cx="94" cy="58" r="28" fill="#f94144"/><path d="M88 38c6-10 10-17 18-18" stroke="#3a5f0b" stroke-width="5" stroke-linecap="round"/><circle cx="86" cy="64" r="6" fill="#ffd7cc" opacity="0.8"/><circle cx="64" cy="70" r="4" fill="#ffd7cc" opacity="0.7"/></svg>`
+  ),
+  sweetPotato: svgToDataUri(
+    String.raw`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120" role="img" aria-label="さつまいもピューレ"><defs><linearGradient id="g3" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="#f3d0ff"/><stop offset="100%" stop-color="#c69bff"/></linearGradient></defs><rect width="160" height="120" fill="url(#g3)"/><path d="M48 84c22 10 64 8 82-18 12-18-2-40-24-40-18 0-34 10-44 24-10 14-22 28-14 34z" fill="#6a329f"/><path d="M54 72c12-4 22-12 28-22 8-14 24-18 32-4" stroke="#f4deff" stroke-width="6" stroke-linecap="round" opacity="0.5"/></svg>`
+  )
+};
+
 const roles = {
   ADMIN: 'je_admin',
   STORE: 'store',
@@ -56,8 +70,7 @@ const products = [
     price: 4800,
     status: 'available',
     inventory: 24,
-    imageUrl:
-      'data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120"><defs><linearGradient id="g1" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="%23d1f7c4"/><stop offset="100%" stop-color="%2392d29d"/></linearGradient></defs><rect width="160" height="120" fill="url(%23g1)"/><ellipse cx="90" cy="60" rx="52" ry="26" fill="%23027a48"/><ellipse cx="90" cy="60" rx="46" ry="20" fill="%2300a15c"/><circle cx="54" cy="52" r="6" fill="%23a7f1c1" opacity="0.7"/><circle cx="67" cy="70" r="4" fill="%23a7f1c1" opacity="0.6"/><path d="M38 60c18-22 44-32 75-14" stroke="%23f2ffeb" stroke-width="4" stroke-linecap="round" opacity="0.4"/></svg>'
+    imageUrl: inlineImages.cucumber
   },
   {
     id: 'p-002',
@@ -68,8 +81,7 @@ const products = [
     price: 3600,
     status: 'available',
     inventory: 18,
-    imageUrl:
-      'data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120"><defs><linearGradient id="g2" x1="0%" x2="0%" y1="0%" y2="100%"><stop offset="0%" stop-color="%23ffe0d5"/><stop offset="100%" stop-color="%23ffab9d"/></linearGradient></defs><rect width="160" height="120" fill="url(%23g2)"/><circle cx="70" cy="62" r="34" fill="%23d62828"/><circle cx="94" cy="58" r="28" fill="%23f94144"/><path d="M88 38c6-10 10-17 18-18" stroke="%233a5f0b" stroke-width="5" stroke-linecap="round"/><circle cx="86" cy="64" r="6" fill="%23ffd7cc" opacity="0.8"/><circle cx="64" cy="70" r="4" fill="%23ffd7cc" opacity="0.7"/></svg>'
+    imageUrl: inlineImages.tomato
   },
   {
     id: 'p-003',
@@ -80,8 +92,7 @@ const products = [
     price: 2200,
     status: 'unavailable',
     inventory: 0,
-    imageUrl:
-      'data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 120"><defs><linearGradient id="g3" x1="0%" x2="100%" y1="0%" y2="100%"><stop offset="0%" stop-color="%23f3d0ff"/><stop offset="100%" stop-color="%23c69bff"/></linearGradient></defs><rect width="160" height="120" fill="url(%23g3)"/><path d="M48 84c22 10 64 8 82-18 12-18-2-40-24-40-18 0-34 10-44 24-10 14-22 28-14 34z" fill="%236a329f"/><path d="M54 72c12-4 22-12 28-22 8-14 24-18 32-4" stroke="%23f4deff" stroke-width="6" stroke-linecap="round" opacity="0.5"/></svg>'
+    imageUrl: inlineImages.sweetPotato
   }
 ];
 
